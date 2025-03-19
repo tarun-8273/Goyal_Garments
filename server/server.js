@@ -7,7 +7,12 @@ const userRoutes = require('./routes/userRoutes');
 const billRoutes = require('./routes/billRoutes');
 const authRoutes = require('./routes/authRoutes');
 
+// Load environment variables first
 dotenv.config();
+
+// Log environment details for debugging
+console.log('MongoDB URI exists:', !!process.env.MONGO_URI);
+console.log('Environment:', process.env.NODE_ENV);
 
 // Connect to database
 connectDB();
@@ -23,7 +28,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/bills', billRoutes);
 app.use('/api/auth', authRoutes);
 
-// Serve static assets in production
+// Serve static assets in production - ADD THIS SECTION
 if (process.env.NODE_ENV === 'production') {
   // Set static folder
   app.use(express.static(path.join(__dirname, '../client/build')));
